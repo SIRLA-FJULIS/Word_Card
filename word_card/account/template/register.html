@@ -1,0 +1,6 @@
+<!-- 註冊 -->
+<form method="post" action="">
+    {% csrf_token %}
+    {{ userForm.as_p }}
+    <input  class="btn" type="submit" value="送出">
+</form>

@@ -3,8 +3,8 @@ from word_set.models import Set
 
 #單字集的表單
 class SetForm(forms.ModelForm):
-    name = forms.CharField(label='標題', max_length=128)
+    set_name = forms.CharField(label='表單標題', max_length=128)
 
    class Meta:
        model = word_set
-       fields = ['name']
+       fields = ['set_name']

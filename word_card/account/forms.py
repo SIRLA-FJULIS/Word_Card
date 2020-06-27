@@ -1,7 +1,7 @@
 from django import forms
 from account.models import User
 
-
+#註冊用表單
 class UserForm(forms.ModelForm):
     username = forms.CharField(label='帳號')
     password = forms.CharField(label='密碼', widget=forms.PasswordInput)
