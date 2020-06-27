@@ -5,6 +5,6 @@ from word_set.models import Set
 class SetForm(forms.ModelForm):
     set_name = forms.CharField(label='表單標題', max_length=128)
 
-   class Meta:
-       model = word_set
+    class Meta:
+       model = Set
        fields = ['set_name']

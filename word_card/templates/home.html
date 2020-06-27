@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>我的單字集</title>
+{% endblock %}
+{% block content %}
+<div>
+    <a href="">新增單字集</a>
+    {% for set in set_list%}
+        <div class="card">
+            1
+        </div>
+    {% empty %}
+        <p>還沒有單字集哦</p>
+    {% endfor %}
+</div>
+{% endblock%}

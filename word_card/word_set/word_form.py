@@ -8,5 +8,5 @@ class WordForm(forms.ModelForm):
 
 
     class Meta:
-       model = word_set
+       model = Word
        fields = ['word', 'chinese']
