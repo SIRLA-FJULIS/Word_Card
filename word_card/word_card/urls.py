@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-from word_set.views import home, cards
+from word_set.views import home, cards, set_new
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', home, name='home'),
     re_path(r'^set/(?P<pk>\d+)/$', cards, name="cards"),
+    re_path(r'^set/new/$', set_new, name='set_new'),
 ]

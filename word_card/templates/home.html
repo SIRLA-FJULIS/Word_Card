@@ -3,7 +3,7 @@
     <title>我的單字集</title>
 {% endblock %}
 {% block content %}
-<a href="">新增單字集</a>
+<a href="{% url 'set_new' %}">新增單字集</a>
 <div class="card-group">
     
     {% for set in set_list%}
