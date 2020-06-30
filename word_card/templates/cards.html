@@ -1,19 +1,21 @@
 {% extends "base.html" %}
 {% block title %}
-    <title>我的單字集</title>
+    <title>1</title>
 {% endblock %}
 {% block content %}
-<a href="">新增單字集</a>
+<a href="">新增單字</a>
 <div class="card-group">
     
-    {% for set in set_list%}
+    {% for word in word_list %}
+    
         <div class="card">
             <div class="card-body">
-            <h2><a href="{% url 'cards' pk=set.pk %}">{{ set.set_name }}</a></h2>
+            <h2 class="card-title text-center">{{ word.word }}</h2>
             </div>
+            <div class="card-footer">1</div>
         </div>
     {% empty %}
-        <p>還沒有單字集哦</p>
+        <p>還沒有單字哦</p>
     {% endfor %}
 </div>
 {% endblock%}
