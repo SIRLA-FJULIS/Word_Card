@@ -1,10 +1,12 @@
 {% extends "base.html" %}
+{% block title %}
+    <title>{{ set.set_name }}</title>
+{% endblock %}
 {% block content %}
-<h1>新增單字集</h1>
-<form method="POST" class="post-form">
+<h1>修改單字集</h1>
+<form action="." method="POST" class="Set-form">
     {% csrf_token %}
     {{ set_form.as_p }}
-    {{ word_form.as_p }}
     <button type="submit" class="save btn btn-default">Save</button>
 </form>
-{% endblock %}
+{% endblock%}

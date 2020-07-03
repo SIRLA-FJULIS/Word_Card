@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 {% block title %}
-    <title>1</title>
+    <title>{{ set.set_name }}</title>
 {% endblock %}
 {% block content %}
-<a href="">新增單字</a>
+<a class="btn btn-default" href="{% url 'set_edit' pk=set.pk %}">修改單字集</a>
 <div class="card-group">
-    
     {% for word in word_list %}
-    
         <div class="card">
             <div class="card-body">
             <h2 class="card-title text-center">{{ word.word }}</h2>
@@ -18,4 +16,5 @@
         <p>還沒有單字哦</p>
     {% endfor %}
 </div>
+<a class="btn btn-default" href="{% url 'set_delete' pk=set.pk%}">删除單字集</a>
 {% endblock%}

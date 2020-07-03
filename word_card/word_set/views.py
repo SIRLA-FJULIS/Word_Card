@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Set, Word
 from .set_form import SetForm
 from .word_form import WordForm
@@ -16,16 +16,38 @@ def cards(request, pk):
 def set_new(request):
     if request.method == "POST":
         set_form = SetForm(request.POST)
-        word_form = WordForm(request.POST)
-        if set_form.is_valid() and word_form.is_valid():
+        if set_form.is_valid():
             set = set_form.save(commit=False)
-            word = word_form.save(commit=False)
             set.author = request.user
             set.save()
-            word.word_set = set
-            word.save()
-            return redirect('/home/')
+            word = request.POST.getlist('word')
+            chinese = request.POST.getlist('chinese')
+            for w, c in zip(word, chinese):
+                words = Word(word_set = set, word = w, chinese = c)
+                words.save()
+            return redirect('cards', pk=set.pk)
     else:
         set_form = SetForm()
-        word_form = WordForm()
-    return render(request, 'card_edit.html', {'set_form':set_form, 'word_form':word_form})
+    return render(request, "card_new.html", {'set_form':set_form})
+
+def set_edit(request, pk):
+    set = get_object_or_404(Set, pk=pk)
+    if request.method == "POST":
+        set_form = SetForm(request.POST, instance=set)
+        word_list = set.word_set.all()
+        for i in word_list:
+            print(i.word)
+            print(i.chinese)
+        if set_form.is_valid():
+            set = set_form.save(commit=False)
+            # set.author = request.user #加上這句就不行
+            set.save()
+            return redirect('cards', pk=set.pk)
+    else:
+        set_form = SetForm(instance=set)
+    return render(request, 'card_edit.html', {'set_form':set_form})
+
+def set_delete(request, pk):
+    set = Set.objects.get(pk=pk)
+    set.delete()
+    return redirect('home')

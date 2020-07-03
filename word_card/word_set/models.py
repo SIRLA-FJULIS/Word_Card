@@ -20,8 +20,8 @@ class Set(models.Model):
 
 class Word(models.Model):
     word_set = models.ForeignKey(Set, on_delete=models.CASCADE)
-    word = models.CharField(max_length=128)#單字的英文
-    chinese = models.CharField(max_length=128)#單字的中文
+    word = models.CharField(max_length=128, null=True)#單字的英文
+    chinese = models.CharField(max_length=128, null=True)#單字的中文
     completed = models.BooleanField(default=False)  #打勾
 
     def __str__(self):

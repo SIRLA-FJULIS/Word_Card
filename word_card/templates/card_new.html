@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>新增單字集</title>
+{% endblock %}
+{% block content %}
+<h1>新增單字集</h1>
+<form action="." method="POST" class="Set-form">
+    {% csrf_token %}
+    <div>
+        {{ set_form.as_p }}
+    </div>
+    <div>
+        <label for='word'>英文</label>
+        <input type="text" id="word" name="word">
+        <label for='chinese'>中文</label>
+        <input type="text" id="chinese" name="chinese">
+    </div>
+    <div>
+        <label for='word'>英文</label>
+        <input type="text" id="word" name="word">
+        <label for='chinese'>中文</label>
+        <input type="text" id="chinese" name="chinese">
+    </div>
+    <div>
+        <label for='word'>英文</label>
+        <input type="text" id="word" name="word">
+        <label for='chinese'>中文</label>
+        <input type="text" id="chinese" name="chinese">
+    </div>
+    <button type="submit" class="save btn btn-default">Save</button>
+</form>
+{% endblock %}
