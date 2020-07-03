@@ -78,7 +78,8 @@
 </style>
 {% endblock %}
 {% block content %}
-<a href="{% url 'set_new' %}" class="btn btn-warning mt-5">新增單字</a>
+<a href="{% url 'set_edit' pk=set.pk %}" class="btn btn-warning mt-5">新增、修改單字</a>
+<a href="{% url 'set_delete' pk=set.pk%}" class="btn btn-warning mt-5"">删除單字集</a>
 <div class="group Offercards text-center m-auto">
     {% csrf_token %}
     {% for word in word_list %}

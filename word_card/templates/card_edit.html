@@ -7,6 +7,14 @@
 <form action="." method="POST" class="Set-form">
     {% csrf_token %}
     {{ set_form.as_p }}
+    {% for words in word_list %}
+        <div>
+            <label for='word'>英文</label>
+            <input type='text' id='word' name='word' value="{{ words.word }}">
+            <label for='chinese'>中文</label>
+            <input type='text' id='chinese' name='chinese' value="{{ words.chinese }}">
+        </div>
+    {% endfor %}
     <button type="submit" class="save btn btn-default">Save</button>
 </form>
 {% endblock%}
