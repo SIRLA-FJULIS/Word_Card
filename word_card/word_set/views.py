@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
 from .models import Set, Word
 from .set_form import SetForm
 from .word_form import WordForm
@@ -12,6 +13,18 @@ def cards(request, pk):
     set = Set.objects.get(pk=pk)
     word_list =set.word_set.all() #主表.子表名稱小寫_set: 得到關聯單字
     return render(request, 'cards.html',{'set':set, 'word_list':word_list})
+
+def word_status(request, pk):
+    word = Word.objects.get(pk=pk)
+    if word.completed == True:
+        word.completed = False
+        word.save()
+        responseData = {'msg':'False'}
+    else:
+        word.completed = True
+        word.save()
+        responseData = {'msg':'True'}
+    return JsonResponse(responseData)
 
 def set_new(request):
     if request.method == "POST":
