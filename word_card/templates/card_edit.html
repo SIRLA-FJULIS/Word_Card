@@ -3,8 +3,8 @@
     <title>{{ set.set_name }}</title>
 {% endblock %}
 {% block content %}
-<h1>修改單字集</h1>
-<form action="." method="POST" class="Set-form">
+<h1 class="mt-5 mb-4 ml-1">修改單字集</h1>
+<form action="." method="POST" class="Set-form m-5">
     {% csrf_token %}
     {{ set_form.as_p }}
     {% for words in word_list %}
@@ -13,14 +13,14 @@
             <input type='text' id='word' name='word' value="{{ words.word }}">
             <label for='chinese'>中文</label>
             <input type='text' id='chinese' name='chinese' value="{{ words.chinese }}">
-            <button onclick="delete_word(event)" class="btn">刪除</button>
+            <button onclick="delete_word(event)" class="btn bg-warning m-2">刪除</button>
         </div>
     {% endfor %}
     <span id="filedSpace"></span>
-    <button type="submit" class="save btn btn-default">Save</button>
+    <button type="submit" class="save btn bg-warning m-2">儲存</button>
 </form>
-<div>
-    <button onclick="addRow()" class="btn btn-default">增加單字</button>
+<div class="m-2">
+    <button onclick="addRow()" class="btn bg-warning ml-5">增加單字</button>
 </div>
 <script>
 function addRow(){
@@ -30,7 +30,7 @@ function addRow(){
         '<input type="text" name="word">' + ' ' +
         '<label for="chinese">中文</label>' + ' ' +
         '<input type="text" name="chinese">' + ' ' +
-        '<button onclick="delete_word(event)" class="btn">刪除</button>' +
+        '<button onclick="delete_word(event)" class="btn bg-warning m-2">刪除</button>' +
         '</div>'
         document.getElementById("filedSpace").appendChild(div)
 }

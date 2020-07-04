@@ -3,8 +3,8 @@
     <title>新增單字集</title>
 {% endblock %}
 {% block content %}
-<h1>新增單字集</h1>
-<form action="." method="POST" class="Set-form">
+<h1 class="mt-5 mb-4 ml-1">新增單字集</h1>
+<form action="." method="POST" class="Set-form m-5">
     {% csrf_token %}
     {{ set_form.as_p }}
     <div>
@@ -12,20 +12,20 @@
         <input type="text" name="word">
         <label class = "letter" for='chinese'>中文</label>
         <input type="text" name="chinese">
-        <button onclick="delete_word(event)" class="btn">刪除</button>
+        <button onclick="delete_word(event)" class="btn bg-warning m-2">刪除</button>
     </div>
     <div>
         <label class = "letter" for='word'>英文</label>
         <input type="text" name="word">
         <label class = "letter" for='chinese'>中文</label>
         <input type="text" name="chinese">
-        <button onclick="delete_word(event)" class="btn">刪除</button>
+        <button onclick="delete_word(event)" class="btn bg-warning m-2">刪除</button>
     </div>
     <span id="filedSpace"></span>
-    <button type="submit" class="save btn btn-default">Save</button>
+    <button type="submit" class="save btn bg-warning m-2">儲存</button>
 </form>
 <div>
-    <button onclick="add_word()" class="btn btn-default">增加單字</button>
+    <button onclick="add_word()" class="btn bg-warning ml-5">增加單字</button>
 </div>
 <script>
 function add_word(){
@@ -35,7 +35,7 @@ function add_word(){
         '<input type="text" name="word">' + ' ' +
         '<label for="chinese">中文</label>' + ' ' +
         '<input type="text" name="chinese">' + ' ' +
-        '<button onclick="delete_word(event)" class="btn">刪除</button>' +
+        '<button onclick="delete_word(event)" class="btn bg-warning m-2">刪除</button>' +
         '</div>'
         document.getElementById("filedSpace").appendChild(div)
 }

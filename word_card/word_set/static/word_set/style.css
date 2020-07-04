@@ -1,8 +1,12 @@
+*{
+    margin:0;
+    padding:0;
+}
 .group {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    /* justify-content: center; */
     border:black;
     }
 .card-wrapper {
@@ -28,11 +32,11 @@
 }
 
 .card-wrapper .card-front_flip {
-    animation: flip-front 1s 1 forwards;
+    animation: flip-front .5s 1 forwards;
     backface-visibility: hidden;
 }
 .card-wrapper .card-back_flip {
-    animation: flip-back 1s 1 forwards;
+    animation: flip-back .5s 1 forwards;
     backface-visibility: hidden;
 }
 
@@ -56,7 +60,7 @@
 }
 .Offercards .cards {
     /* background-color: #fff; */
-    transition: all 0.3s linear;
+    transition: all 0.2s linear;
     position: absolute;
     left: 0;
     top: 0;
