@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'word_set',
     'account',
+    'social_django',  # 第三方登入
 ]
 
 MIDDLEWARE = [
@@ -64,6 +66,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',  # 第三方登入
+                'social_django.context_processors.login_redirect',  # 第三方登入
             ],
         },
     },
@@ -122,3 +126,24 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'account.User'
+
+# 第三方登入
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_GITHUB_USE_OPENID_AS_USERNAME = True
+
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '658373907405-e5tbvfokthvtr437okjod7jfge8rb8ms.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'hi_0iaieoWKkB6S1Rf7sYru8'
+
+# 登入成功後轉址
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home'
+
+
+
+
+

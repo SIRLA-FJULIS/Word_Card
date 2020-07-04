@@ -22,6 +22,7 @@
         {% else %}
         <a class="navbar text-dark" href="">登入</a>
         <a class="navbar text-dark" href="">註冊</a>
+        <a href="{% url "social:begin" "google-oauth2" %}">google</a>
         {% endif %}
     </nav>
 
