@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block content %}
-<a href="{% url 'set_edit' pk=set.pk %}" class="btn btn-warning mt-5">新增、修改單字</a>
-<a href="{% url 'set_delete' pk=set.pk%}" class="btn btn-warning mt-5"">删除單字集</a>
+<a href="{% url 'set_edit' pk=set.pk %}" class="btn bg-warning text-dark mt-5">新增、修改單字</a>
+<a href="{% url 'set_delete' pk=set.pk%}" class="btn bg-warning text-dark mt-5">删除單字集</a>
 <div class="group Offercards text-center m-auto">
     {% csrf_token %}
     {% for word in word_list %}
-    <div class="m-2 text-center cards">
-        <div>
+    <div class="m-2 text-center cards bg-white">
+        <div class="bg-warning">
             <div class="card-wrapper">
                 <div class="card-front bg-warning">
                     <p class="size-3">{{ word.chinese }}</p>
@@ -20,15 +20,16 @@
                     <p>{{ word.word }}</p>
                 </div>
             </div>
-            <button class="btn shadow-sm r-0 bg-white" id="{{ word.id }}" onclick="toggle_completed({{ word.id }})">
+            <button class="btn bg-warning rounded-top" id="{{ word.id }}" onclick="toggle_completed({{ word.id }})">
                 {% if word.completed == True %}
                 <img src="https://img.icons8.com/metro/24/000000/checked.png"/>
                 {% else %}
                 <img src="https://img.icons8.com/material-two-tone/24/000000/circled.png"/> 
                 {% endif%}
             </button>
+        
         </div>
-        <button class="cardBtn">下一個</button>
+        <button class="cardBtn btn bg-warning ml-3">></button>
     </div>
     {% empty %}
         <p>還沒有單字哦</p>

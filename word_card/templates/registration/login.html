@@ -1,10 +1,13 @@
 {% extends "base.html" %}
+{% block title %}
+    <title>登入</title>
+{% endblock %}
 {% block content %}
 <div class="text-center">
-    <h1 class="m-3">Login</h1>
+    <h1 class="m-3">登入</h1>
     <form action="{% url 'login' %}" method="post" class="login">
         {% csrf_token %}
-        <table class="text-center m-auto">
+        <table class="text-center m-auto" >
             <tr>
                 <td>{{ form.username.label_tag }}</td>
                 <td>{{ form.username }}</td>
@@ -15,8 +18,14 @@
             </tr>
         </table>
         <div class="m-3">
-        <input type="submit" value="login">
-        <a href="{% url 'password_reset' %}">忘記密碼？</a>
+        <p>    
+            <input type="submit" value="登入" class="btn btn-warning">
+            <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-warning">google登入</a>
+        </p>
+        <p>
+            <a class="text-dark" href="/register">註冊</a>
+            <a href="{% url 'password_reset' %}" class="text-dark">忘記密碼？</a>
+        </p>
         </div>
     </form>
 </div>

@@ -3,14 +3,19 @@
     <title>我的單字集</title>
 {% endblock %}
 {% block content %}
-<a href="{% url 'set_new' %}" class="btn btn-warning mt-5">新增單字集</a>
+<a href="{% url 'set_new' %}" class="btn bg-warning text-dark m-4">新增單字集</a>
 <div class="card-deck">
     {% for set in set_list%}
-        <div class="card m-5">
+        <div class="card m-5" style="max-width: 24rem;">
             <div class="card-body text-center">
-            <h2><a href="{% url 'cards' pk=set.pk %}" class="text-warning">{{ set.set_name }}</a></h2>
-            <p></p>
-        </div>
+                {% if request.user.is_authenticated %}
+                <h2><a href="{% url 'cards' pk=set.pk %}" class="text-warning">{{ set.set_name }}</a></h2>
+                {% else %}
+                <h2><a href="{% url 'cards' pk=set.pk %}" class="text-warning">{{ set.set_name }}</a></h2>
+                <p class="text-right mt-5">{{ set.author }}</p>
+                {% endif %}
+                
+            </div>
         </div>
     {% empty %}
         <p>還沒有單字集哦</p>

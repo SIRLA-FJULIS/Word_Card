@@ -6,7 +6,7 @@
     border:black;
     }
 .card-wrapper {
-width: 300px;
+    width: 300px;
     height: 200px;
     margin: 10px;
     position: relative;
@@ -20,9 +20,12 @@ width: 300px;
     line-height: 200px;
     text-align: center;
 }
-/* .card-wrapper .card-back {
+/* .card-wrapper .card-back {   
     background-color: pink; 
 } */
+.card-wrapper p{
+    font-size: 3rem;
+}
 
 .card-wrapper .card-front_flip {
     animation: flip-front 1s 1 forwards;
@@ -52,7 +55,7 @@ width: 300px;
     position: relative;
 }
 .Offercards .cards {
-    background-color: #fff;
+    /* background-color: #fff; */
     transition: all 0.3s linear;
     position: absolute;
     left: 0;
@@ -64,6 +67,6 @@ width: 300px;
     display: flex;
     -webkit-justify-content: flex-end;
     -moz-justify-content: flex-end;
-    justify-content: flex-end;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: center;
 }
