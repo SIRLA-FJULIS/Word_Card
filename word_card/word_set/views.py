@@ -3,10 +3,15 @@ from django.http import JsonResponse
 from .models import Set, Word
 from .set_form import SetForm
 from .word_form import WordForm
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
 def home(request):
-    set_list = Set.objects.all()
+    if request.user.is_authenticated:
+        id = request.user.id
+        set_list = Set.objects.filter(author_id=id) 
+    else:
+        set_list = Set.objects.all()
     return render(request, 'home.html',{'set_list':set_list,})
 
 def cards(request, pk):
@@ -66,3 +71,34 @@ def set_delete(request, pk):
     set = Set.objects.get(pk=pk)
     set.delete()
     return redirect('home')
+
+
+def login(request):
+    if request.user.is_authenticated:
+        return redirect('/home/')
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    user = auth.authenticate(username=username, password=password)
+    if user is not None and user.is_active:
+        auth.login(request, user)
+        return redirect('/home/')
+    else:
+        return render(request, 'login.html', locals())
+
+    def logout(request):
+        auth.logout(request)
+        return redirect('/home/')
+
+def register(request):
+ if request.method == 'POST':
+  form = UserCreationForm(request.POST)
+  print("Errors", form.errors)
+  if form.is_valid():
+   form.save()
+   return redirect('home')
+  else:
+    return render(request, 'registration/register.html', {'form':form})
+ else:
+  form = UserCreationForm()
+  context = {'form': form}
+  return render(request, 'registration/register.html', context)
