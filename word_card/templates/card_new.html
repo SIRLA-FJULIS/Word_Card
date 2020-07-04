@@ -6,27 +6,43 @@
 <h1>新增單字集</h1>
 <form action="." method="POST" class="Set-form">
     {% csrf_token %}
+    {{ set_form.as_p }}
     <div>
-        {{ set_form.as_p }}
+        <label class = "letter" for='word'>英文</label>
+        <input type="text" name="word">
+        <label class = "letter" for='chinese'>中文</label>
+        <input type="text" name="chinese">
+        <button onclick="delete_word(event)" class="btn">刪除</button>
     </div>
     <div>
-        <label for='word'>英文</label>
-        <input type="text" id="word" name="word">
-        <label for='chinese'>中文</label>
-        <input type="text" id="chinese" name="chinese">
+        <label class = "letter" for='word'>英文</label>
+        <input type="text" name="word">
+        <label class = "letter" for='chinese'>中文</label>
+        <input type="text" name="chinese">
+        <button onclick="delete_word(event)" class="btn">刪除</button>
     </div>
-    <div>
-        <label for='word'>英文</label>
-        <input type="text" id="word" name="word">
-        <label for='chinese'>中文</label>
-        <input type="text" id="chinese" name="chinese">
-    </div>
-    <div>
-        <label for='word'>英文</label>
-        <input type="text" id="word" name="word">
-        <label for='chinese'>中文</label>
-        <input type="text" id="chinese" name="chinese">
-    </div>
+    <span id="filedSpace"></span>
     <button type="submit" class="save btn btn-default">Save</button>
 </form>
+<div>
+    <button onclick="add_word()" class="btn btn-default">增加單字</button>
+</div>
+<script>
+function add_word(){
+        let div = document.createElement("div")
+        div.innerHTML = '<div>' +
+        '<label for="word">英文</label>' + ' ' +
+        '<input type="text" name="word">' + ' ' +
+        '<label for="chinese">中文</label>' + ' ' +
+        '<input type="text" name="chinese">' + ' ' +
+        '<button onclick="delete_word(event)" class="btn">刪除</button>' +
+        '</div>'
+        document.getElementById("filedSpace").appendChild(div)
+}
+function delete_word(e){
+    let file = e.target.parentNode.parentNode
+    let del_div = e.target.parentNode
+    file.removeChild(del_div)
+}
+</script>
 {% endblock %}

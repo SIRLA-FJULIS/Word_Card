@@ -13,8 +13,31 @@
             <input type='text' id='word' name='word' value="{{ words.word }}">
             <label for='chinese'>中文</label>
             <input type='text' id='chinese' name='chinese' value="{{ words.chinese }}">
+            <button onclick="delete_word(event)" class="btn">刪除</button>
         </div>
     {% endfor %}
+    <span id="filedSpace"></span>
     <button type="submit" class="save btn btn-default">Save</button>
 </form>
-{% endblock%}
+<div>
+    <button onclick="addRow()" class="btn btn-default">增加單字</button>
+</div>
+<script>
+function addRow(){
+        let div = document.createElement("div")
+        div.innerHTML = '<div>' +
+        '<label for="word">英文</label>' + ' ' +
+        '<input type="text" name="word">' + ' ' +
+        '<label for="chinese">中文</label>' + ' ' +
+        '<input type="text" name="chinese">' + ' ' +
+        '<button onclick="delete_word(event)" class="btn">刪除</button>' +
+        '</div>'
+        document.getElementById("filedSpace").appendChild(div)
+}
+function delete_word(e){
+    let file = e.target.parentNode.parentNode
+    let del_div = e.target.parentNode
+    file.removeChild(del_div)
+}
+</script>
+{% endblock %}
