@@ -4,81 +4,9 @@
     <title>單字集 {{ set.set_name }}</title>
 {% endblock %}
 
-{% block style %}
-<style>
-    .group {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        border:black;
-        }
-   .card-wrapper {
-       width: 300px;
-        height: 200px;
-        margin: 10px;
-        position: relative;
-        }
-    .card-wrapper .card-front, 
-    .card-wrapper .card-back {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        /* background-color: rgb(235, 116, 135); */
-        line-height: 200px;
-        text-align: center;
-    }
-    /* .card-wrapper .card-back {
-        background-color: pink; 
-    } */
-
-    .card-wrapper .card-front_flip {
-        animation: flip-front 1s 1 forwards;
-        backface-visibility: hidden;
-    }
-    .card-wrapper .card-back_flip {
-        animation: flip-back 1s 1 forwards;
-        backface-visibility: hidden;
-    }
-    
-    @keyframes flip-front {
-        0% {
-            transform: rotateY(0deg); }
-        100% {
-            transform: rotateY(180deg); } 
-    }
-    @keyframes flip-back {
-        0% {
-            transform: rotateY(180deg); }
-        100% {
-            transform: rotateY(0deg); } 
-    }
-/* 切換卡片 */
-.Offercards {
-    height: 300px;
-    width: 400px;
-    position: relative;
-}
-.Offercards .cards {
-    background-color: #fff;
-    transition: all 0.3s linear;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: flex;
-    -webkit-justify-content: flex-end;
-    -moz-justify-content: flex-end;
-    justify-content: flex-end;
-    align-items: flex-end;
-}
-</style>
-{% endblock %}
 {% block content %}
-<a href="{% url 'set_new' %}" class="btn btn-warning mt-5">新增單字</a>
+<a href="{% url 'set_edit' pk=set.pk %}" class="btn btn-warning mt-5">新增、修改單字</a>
+<a href="{% url 'set_delete' pk=set.pk%}" class="btn btn-warning mt-5"">删除單字集</a>
 <div class="group Offercards text-center m-auto">
     {% csrf_token %}
     {% for word in word_list %}

@@ -147,3 +147,5 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home'
 
 
 
+LOGIN_REDIRECT_URL = '/home/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'

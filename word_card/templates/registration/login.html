@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center">
+    <h1 class="m-3">Login</h1>
+    <form action="{% url 'login' %}" method="post" class="login">
+        {% csrf_token %}
+        <table class="text-center m-auto">
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
+        <div class="m-3">
+        <input type="submit" value="login">
+        <a href="{% url 'password_reset' %}">忘記密碼？</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

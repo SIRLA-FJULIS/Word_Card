@@ -15,11 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
-from word_set.views import home, cards, set_new, set_edit, set_delete, word_status
+from word_set.views import home, cards, set_new, set_edit, set_delete, word_status, register
+# from account.views import register
+from django.conf import settings
+from django.contrib.auth import views
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', home, name='home'),
     path('', include('social_django.urls', namespace='social')),
+
+    path('admin/', admin.site.urls),
+    path('home/', home, name='home'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('register/', register, name='register'),
     re_path(r'^set/(?P<pk>\d+)/$', cards, name="cards"),
     re_path(r'^set/new/$', set_new, name='set_new'),
     re_path(r'^set/(?P<pk>[0-9]+)/edit/$', set_edit, name='set_edit'),
