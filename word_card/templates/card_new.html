@@ -4,6 +4,7 @@
 {% endblock %}
 {% block content %}
 <h1 class="mt-5 mb-4 ml-1">新增單字集</h1>
+<div class="d-flex">
 <form action="." method="POST" class="Set-form m-5">
     {% csrf_token %}
     {{ set_form.as_p }}
@@ -26,6 +27,7 @@
 </form>
 <div>
     <button onclick="add_word()" class="btn bg-warning ml-5">增加單字</button>
+</div>
 </div>
 
 {% endblock %}

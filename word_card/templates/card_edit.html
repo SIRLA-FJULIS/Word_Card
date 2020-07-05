@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
 <h1 class="mt-5 mb-4 ml-1">修改單字集</h1>
-<div class="d-flex align-items-start">
+<div class="d-flex">
 <form action="." method="POST" class="Set-form m-5">
     {% csrf_token %}
     {{ set_form.as_p }}
