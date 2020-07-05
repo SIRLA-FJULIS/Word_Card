@@ -1,1 +1,0 @@
-web: gunicorn --pythonpath word_card word_card.wsgi

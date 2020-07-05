@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  <title>Register Page</title>
+  <title>注册</title>
 {% endblock title %}
 
 {% block content %}
+<div class="ml-5 text-center">
+
+<h1 class="mt-5 mb-4 ml-1">注册賬號</h1>
   <form method="POST">
       {% csrf_token %}
       {{ form.as_p }}
-      {% for field in form %}
-        {{ field.errors }}
-      {% endfor %}
-      <button type="submit">送出</button>
+      {{ form.user.name }}
+ 
+      <button type="submit" class="btn bg-warning">送出</button>
   </form>
-  
+</div>
+<script>
+  $('.helptext').css('display', 'none')
+  $('ul').css('display', 'none')
+</script>
 {% endblock content %}
