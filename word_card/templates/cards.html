@@ -6,18 +6,14 @@
 
 {% block content %}
 {% csrf_token %}
-<!-- {% if request.user.is_authenticated %}
-    <div class="text-left mr-5 d-inline-blick">
-        <button id="show_btn" class="btn bg-white text-dark mt-5">未完成單字</button>
-        
-    </div>  
-{% endif %} -->
+
 {% if request.user.is_authenticated %}
     <div class="text-right mr-5 d-inline-blick">
         <a href="{% url 'set_edit' pk=set.pk %}" class="btn bg-warning text-dark mt-5">新增、修改單字</a>
         <a href="{% url 'set_delete' pk=set.pk%}" class="btn bg-warning text-dark mt-5">删除單字集</a>
     </div>  
 {% endif %}
+
 <!-- show all -->
     <div id="show_all" class="group Offercards text-center m-auto">
         {% for word in word_list %}
@@ -48,172 +44,7 @@
         {% endfor %}
         
     </div>
-<!-- show not completed -->
-<!-- <div id="show_not_completed" class="group Offercards text-center m-auto" style="display: none;">
-    {% for word in word_list %}
-    {% if word.completed == False %}
-    <div class="m-2 text-center cards bg-white">
-        <div class="bg-warning">
-            <div class="card-wrapper">
-                <div class="card-front bg-warning">
-                    <p class="size-3">{{ word.chinese }}</p>
-                </div>
-                <div class="card-back bg-warning">
-                    <p>{{ word.word }}</p>
-                </div>
-            </div>
-            <button class="btn bg-warning rounded-top" id="{{ word.id }}" onclick="toggle_completed({{ word.id }})">
-                {% if word.completed == True %}
-                <img src="https://img.icons8.com/metro/24/000000/checked.png"/>
-                {% else %}
-                <img src="https://img.icons8.com/material-two-tone/24/000000/circled.png"/> 
-                {% endif%}
-            </button>
-        
-        </div>
-        <button class="cardBtn btn bg-warning ml-3">></button>
-        {% endif%}
-    </div>
-    {% empty %}
-        <p>還沒有單字哦</p>
-    {% endfor %}
-</div> -->
 
-<!-- show -->
-<!-- <script>
-        $("#show_btn").bind('click', function() {
-            if ($("#show_btn").text() == '未完成單字'){
-                $('#show_not_completed').css('display','block')
-                $('#show_all').css('display','none')
-                $("#show_btn").text('全部單字')
-            }
-            else{
-                $('#show_all').css('display','block')
-                $('#show_not_completed').css('display','none')
-                $("#show_btn").text('未完成單字')
-            }
-        })
-</script> -->
-<!-- 卡片翻轉 -->
-<script>
-    let card = document.getElementsByClassName('card-wrapper');
-    console.log(card);
-    for(let i = 0 ; i < card.length; i++){
-        card[i].addEventListener("click", function(){
-            console.log(this.firstElementChild);
-            let carBack = this.firstElementChild.classList;
-            let carFront = this.lastElementChild.classList;
-            console.log(carBack);
-            if (carBack.contains('card-back_flip')){
-                carBack.remove('card-back_flip');
-            } else{
-                carBack.add('card-back_flip');
-            }
-            if (carFront.contains('card-front_flip')){
-                carFront.remove('card-front_flip');
-            } else{
-                carFront.add('card-front_flip');
-            }
-        })
-    }
+<script src="{% static 'word_set/cards.js' %} "></script>
 
-</script>
-<!-- 卡片切换 -->
-<script>
-    $(document).ready(function(){
-
-var $cards = $('.Offercards .cards'),
-    zIn = $cards.length,
-    newzIn = 0,
-    mt = -2,
-    ml = -11,
-    scale = 1,
-    cnt = 0,
-    newScale = 0.8;
-
-function forIndex(){
-    $($cards).each(function(){
-        zIn--;
-        $(this).css({'z-index': zIn});
-    });
-}
-forIndex();
-
-function forEach(){
-    $($cards).each(function(){
-        mt+=2;
-        ml+=11;
-        scale-=0.05;
-        $(this).css({'margin': ''+ mt +'px 0 0 '+ ml +'px', 'transform': 'scale('+ scale +')'});
-    });
-}
-forEach();
-
-$('.cardBtn').click(function(){
-    var btnCard = $(this).closest('.cards');
-    $(btnCard).css({'transform': 'translate3d(200px,0,0) rotate(15deg)'}).removeClass('active').next().css({'transform': 'scale(0.94)', 'margin': 0}).addClass('active');
-    cnt++;
-    newScale+=0.04;
-    newzIn-=1;;
-    setTimeout(()=>{
-        $(btnCard).fadeOut(200, function(){
-            setTimeout(()=>{
-                $(btnCard).css({'transform': 'scale('+ newScale +')', 'z-index': newzIn});
-                setTimeout(()=>{
-                    $(btnCard).show();
-                }, 400)
-            }, 150);
-            if(cnt >= $cards.length){
-                cnt = 0;
-                $($cards).first().css({'transform':'scale(0.94)'}).addClass('active');
-                zIn = $cards.length;
-                mt = -2;
-                ml = -11;
-                newScale = 0.8;
-                newzIn = 0;
-                scale = 1;
-                forIndex();
-                forEach();
-            }
-        });
-    }, 100);
-});
-});
-
-</script>
-<!-- 改變completed -->
-<script>
-    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-    function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-    // 設定token
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });
-    // 送出request的方法
-    function toggle_completed(id){
-        let btn = $('#' + id)
-        $.ajax({
-            type: 'POST',   
-            url: '/word/' + id + '/update/',
-            data: JSON.stringify({'status': status}),
-        }).done(function(value) {
-            if (value.msg === 'True'){
-                btn.html('<img src="https://img.icons8.com/metro/24/000000/checked.png"/>')
-            }
-            else{
-                btn.html('<img src="https://img.icons8.com/material-two-tone/24/000000/circled.png"/> ')
-            }
-
-                
-        })
-    }
-    
-</script>
 {% endblock%}

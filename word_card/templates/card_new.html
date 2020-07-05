@@ -9,16 +9,16 @@
     {{ set_form.as_p }}
     <div>
         <label class = "letter" for='word'>英文</label>
-        <input type="text" name="word">
+        <input type="text" name="word" required="required">
         <label class = "letter" for='chinese'>中文</label>
-        <input type="text" name="chinese">
+        <input type="text" name="chinese" required="required">
         <button onclick="delete_word(event)" class="btn bg-warning m-2">刪除</button>
     </div>
     <div>
         <label class = "letter" for='word'>英文</label>
-        <input type="text" name="word">
+        <input type="text" name="word" required="required">
         <label class = "letter" for='chinese'>中文</label>
-        <input type="text" name="chinese">
+        <input type="text" name="chinese" required="required">
         <button onclick="delete_word(event)" class="btn bg-warning m-2">刪除</button>
     </div>
     <span id="filedSpace"></span>
@@ -27,22 +27,5 @@
 <div>
     <button onclick="add_word()" class="btn bg-warning ml-5">增加單字</button>
 </div>
-<script>
-function add_word(){
-        let div = document.createElement("div")
-        div.innerHTML = '<div>' +
-        '<label for="word">英文</label>' + ' ' +
-        '<input type="text" name="word">' + ' ' +
-        '<label for="chinese">中文</label>' + ' ' +
-        '<input type="text" name="chinese">' + ' ' +
-        '<button onclick="delete_word(event)" class="btn bg-warning m-2">刪除</button>' +
-        '</div>'
-        document.getElementById("filedSpace").appendChild(div)
-}
-function delete_word(e){
-    let file = e.target.parentNode.parentNode
-    let del_div = e.target.parentNode
-    file.removeChild(del_div)
-}
-</script>
+
 {% endblock %}

@@ -1,18 +1,20 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
     <title>{{ set.set_name }}</title>
 {% endblock %}
 {% block content %}
 <h1 class="mt-5 mb-4 ml-1">修改單字集</h1>
+<div class="d-flex align-items-start">
 <form action="." method="POST" class="Set-form m-5">
     {% csrf_token %}
     {{ set_form.as_p }}
     {% for words in word_list %}
         <div>
             <label for='word'>英文</label>
-            <input type='text' id='word' name='word' value="{{ words.word }}">
+            <input type='text' id='word' name='word' value="{{ words.word }}" required="required">
             <label for='chinese'>中文</label>
-            <input type='text' id='chinese' name='chinese' value="{{ words.chinese }}">
+            <input type='text' id='chinese' name='chinese' value="{{ words.chinese }}" required="required">
             <button onclick="delete_word(event)" class="btn bg-warning m-2">刪除</button>
         </div>
     {% endfor %}
@@ -22,22 +24,7 @@
 <div class="m-2">
     <button onclick="addRow()" class="btn bg-warning ml-5">增加單字</button>
 </div>
-<script>
-function addRow(){
-        let div = document.createElement("div")
-        div.innerHTML = '<div>' +
-        '<label for="word">英文</label>' + ' ' +
-        '<input type="text" name="word">' + ' ' +
-        '<label for="chinese">中文</label>' + ' ' +
-        '<input type="text" name="chinese">' + ' ' +
-        '<button onclick="delete_word(event)" class="btn bg-warning m-2">刪除</button>' +
-        '</div>'
-        document.getElementById("filedSpace").appendChild(div)
-}
-function delete_word(e){
-    let file = e.target.parentNode.parentNode
-    let del_div = e.target.parentNode
-    file.removeChild(del_div)
-}
-</script>
+</div>
+<script src="{% static 'word_set/edit_cards.js' %} "></script>
+
 {% endblock %}
