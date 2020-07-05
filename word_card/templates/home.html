@@ -3,7 +3,9 @@
     <title>我的單字集</title>
 {% endblock %}
 {% block content %}
+{% if request.user.is_authenticated %}
 <a href="{% url 'set_new' %}" class="btn bg-warning text-dark m-4">新增單字集</a>
+{% endif %}
 <div class="card-deck">
     {% for set in set_list%}
         <div class="card m-5" style="max-width: 24rem;">
